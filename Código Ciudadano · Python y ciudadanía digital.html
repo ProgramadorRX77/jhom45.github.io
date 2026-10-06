@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Código Ciudadano · Python y ciudadanía digital</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f7f6fb;--card:#fff;--ink:#1f1b2e;--mute:#5d5873;--pri:#5b3fd1;--acc:#16a37f;--line:#e2dff0;--code:#1e1b2e;--codeink:#e9e6ff}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14121f;--card:#1d1a2c;--ink:#efecff;--mute:#a9a3c4;--pri:#9d86ff;--acc:#3dd6aa;--line:#2f2b45;--code:#0c0b14}}
+:root[data-theme="dark"]{--bg:#14121f;--card:#1d1a2c;--ink:#efecff;--mute:#a9a3c4;--pri:#9d86ff;--acc:#3dd6aa;--line:#2f2b45;--code:#0c0b14}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:1000px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+nav .w{display:flex;gap:18px;align-items:center;overflow-x:auto;padding-top:10px;padding-bottom:10px;white-space:nowrap}
+nav a{color:var(--mute);text-decoration:none;font-size:14px;font-weight:600}nav a:hover{color:var(--pri)}
+nav b{color:var(--pri);margin-right:auto}
+.hero{padding:64px 0 48px;text-align:center}
+.tag{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px 14px;font-size:13px;color:var(--pri);font-weight:600}
+h1{font-size:clamp(32px,6vw,56px);line-height:1.1;margin:18px 0 12px}
+h1 span{color:var(--pri)}
+.lead{max-width:640px;margin:0 auto 26px;color:var(--mute);font-size:18px}
+.btn{display:inline-block;background:var(--pri);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700;border:0;font-size:15px;cursor:pointer;margin:4px}
+.btn.o{background:transparent;color:var(--pri);border:2px solid var(--pri)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:36px}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.stats b{display:block;font-size:26px;color:var(--pri)}
+section{padding:44px 0}
+.part{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--acc);text-transform:uppercase}
+h2{font-size:clamp(26px,4vw,36px);margin:4px 0 18px}
+h3{margin:0 0 8px;font-size:18px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.c p,.c li{color:var(--mute);margin:6px 0}
+ul{padding-left:20px;margin:6px 0}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:15px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--pri);color:#fff}
+pre{background:var(--code);color:var(--codeink);padding:14px;border-radius:10px;overflow-x:auto;font:13.5px/1.55 ui-monospace,Menlo,Consolas,monospace;margin:10px 0}
+.k{color:#c4a8ff}.s{color:#7ee6c1}.m{color:#8f89ad}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;padding:10px 0}
+.cp{float:right;font-size:12px;background:var(--line);color:var(--ink);border:0;border-radius:6px;padding:3px 9px;cursor:pointer}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:8px 16px;font-weight:600;cursor:pointer;font-size:14px}
+.tabs button[aria-selected=true]{background:var(--pri);color:#fff;border-color:var(--pri)}
+.pn{display:none}.pn.on{display:block}
+.pauta{border-left:4px solid var(--acc)}
+.reto{background:color-mix(in srgb,var(--acc) 14%,transparent);border-radius:10px;padding:10px 14px;margin-top:10px;color:var(--ink)!important}
+.concl{background:var(--pri);color:#fff;border-radius:18px;padding:32px;margin:20px 0 40px}
+.concl h2{margin-top:0}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:24px 0 40px}
+@media print{nav,.btn,.cp,.tabs{display:none}.pn{display:block!important}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<nav><div class="w"><b>🐍 Código Ciudadano</b><a href="#a">Parte A · Recurso</a><a href="#mod">Módulos</a><a href="#act">Actividades</a><a href="#b">Parte B · Ética digital</a><a href="#fin">Conclusión</a></div></nav>
+
+<header class="hero"><div class="w">
+<span class="tag">Bachillerato · Laboratorio interactivo</span>
+<h1>Aprende Python. <span>Programa con ética.</span></h1>
+<p class="lead">Un laboratorio por retos donde dominas los fundamentos de Python y, al mismo tiempo, aprendes a ser un ciudadano digital responsable.</p>
+<a class="btn" href="#a">Explorar el recurso</a><a class="btn o" href="#b">Ir a ética digital</a><button class="btn o" onclick="window.print()">Imprimir / PDF</button>
+<div class="stats"><div><b>6</b>módulos</div><div><b>~10 h</b>de trabajo</div><div><b>4</b>ejes de ciudadanía digital</div><div><b>100%</b>código abierto y gratuito</div></div>
+</div></header>
+
+<section id="a"><div class="w">
+<div class="part">Parte A</div><h2>Diseño del recurso didáctico</h2>
+<div class="g">
+<div class="c"><h3>Título</h3><p><b>«Código Ciudadano: Laboratorio de Python»</b></p><p>Modalidad elegida: <b>actividad interactiva tipo laboratorio</b>. Programar se aprende ejecutando, fallando y corrigiendo; un laboratorio con retos cortos da retroalimentación inmediata y mantiene la motivación mejor que leer una guía.</p></div>
+<div class="c"><h3>Descripción</h3><p>Cuaderno interactivo con retos progresivos para estudiantes de bachillerato sin experiencia previa. Cada módulo cierra con un «punto de ciudadanía» que conecta lo programado con una decisión ética real.</p></div>
+<div class="c"><h3>Objetivo general</h3><p>Desarrollar programas sencillos en Python aplicando buenas prácticas de autoría, licencias, privacidad y uso responsable de la IA.</p></div>
+</div>
+<h3 style="margin-top:26px">Objetivos específicos (Bloom)</h3>
+<div class="g">
+<div class="c"><ul><li><b>Identificar</b> tipos de datos y variables.</li><li><b>Aplicar</b> operadores y condicionales para tomar decisiones.</li><li><b>Construir</b> bucles que automaticen tareas.</li></ul></div>
+<div class="c"><ul><li><b>Diseñar</b> funciones reutilizables.</li><li><b>Organizar</b> datos en listas y diccionarios.</li><li><b>Depurar</b> errores con try/except.</li><li><b>Evaluar</b> críticamente código de terceros y de IA.</li></ul></div>
+</div>
+</div></section>
+
+<section id="mod"><div class="w">
+<h2>Estructura, contenidos y metodología</h2>
+<div class="tw"><table>
+<tr><th>Módulo</th><th>Contenido Python</th><th>Duración</th><th>Punto de ciudadanía</th></tr>
+<tr><td>1. Hola, mundo</td><td>Variables, tipos de datos, <code>print</code>/<code>input</code></td><td>1,5 h</td><td>Datos personales</td></tr>
+<tr><td>2. Calculadora</td><td>Operadores y expresiones</td><td>1,5 h</td><td>Citar fuentes</td></tr>
+<tr><td>3. Decisiones</td><td><code>if / elif / else</code></td><td>1,5 h</td><td>Licencias</td></tr>
+<tr><td>4. Repetición</td><td>Bucles <code>for</code> y <code>while</code></td><td>1,5 h</td><td>Contraseñas</td></tr>
+<tr><td>5. Mis herramientas</td><td>Funciones, listas y diccionarios</td><td>2 h</td><td>Netiqueta en GitHub</td></tr>
+<tr><td>6. A prueba de fallos</td><td>Manejo de errores y proyecto final</td><td>2 h</td><td>IA como asistente</td></tr>
+</table></div>
+<div class="g" style="margin-top:18px">
+<div class="c"><h3>Navegación</h3><p>Cada módulo: <b>Explora</b> (ejemplo) → <b>Practica</b> (reto en Colab) → <b>Crea</b> (mini‑proyecto) → <b>Reflexiona</b> (punto de ciudadanía).</p></div>
+<div class="c"><h3>Metodología</h3><p><b>Aprendizaje basado en retos</b> con <b>gamificación</b> (insignias por módulo) y <b>aula invertida</b>: la teoría se ve en casa; el aula se usa para depurar y compartir.</p></div>
+<div class="c"><h3>Herramientas</h3><ul><li><b>Google Colab</b>: ejecutar código sin instalar.</li><li><b>Genially</b>: portada y mapa de navegación.</li><li><b>H5P</b>: quizzes de autoevaluación.</li></ul></div>
+</div>
+</div></section>
+
+<section id="act"><div class="w">
+<h2>Actividades prácticas progresivas</h2>
+<details open><summary>Reto 1 · Variables y entrada de datos</summary>
+<button class="cp" data-c="r1">Copiar</button>
+<pre id="r1"><span class="m"># No pidas más datos de los necesarios</span>
+nombre = <span class="k">input</span>(<span class="s">"¿Cómo te llamas? "</span>)
+edad = <span class="k">int</span>(<span class="k">input</span>(<span class="s">"¿Cuántos años tienes? "</span>))
+<span class="k">print</span>(<span class="s">f"Hola, {nombre}. En 5 años tendrás {edad + 5}."</span>)</pre></details>
+<details><summary>Reto 2 · Condicionales</summary>
+<button class="cp" data-c="r2">Copiar</button>
+<pre id="r2">nota = <span class="k">float</span>(<span class="k">input</span>(<span class="s">"Nota (0-100): "</span>))
+<span class="k">if</span> nota >= 90:
+    <span class="k">print</span>(<span class="s">"Excelente"</span>)
+<span class="k">elif</span> nota >= 70:
+    <span class="k">print</span>(<span class="s">"Aprobado"</span>)
+<span class="k">else</span>:
+    <span class="k">print</span>(<span class="s">"A reforzar"</span>)</pre></details>
+<details><summary>Reto 3 · Bucles y validación de contraseña</summary>
+<button class="cp" data-c="r3">Copiar</button>
+<pre id="r3"><span class="k">while True</span>:
+    clave = <span class="k">input</span>(<span class="s">"Crea una contraseña: "</span>)
+    <span class="k">if len</span>(clave) >= 12 <span class="k">and</span> <span class="k">any</span>(c.isdigit() <span class="k">for</span> c <span class="k">in</span> clave):
+        <span class="k">print</span>(<span class="s">"Contraseña robusta ✔"</span>)
+        <span class="k">break</span>
+    <span class="k">print</span>(<span class="s">"Mínimo 12 caracteres y un número."</span>)</pre></details>
+<details><summary>Reto 4 · Funciones, listas y diccionarios</summary>
+<button class="cp" data-c="r4">Copiar</button>
+<pre id="r4"><span class="k">def</span> promedio(notas):
+    <span class="k">return sum</span>(notas) / <span class="k">len</span>(notas)
+
+estudiante = {<span class="s">"alias"</span>: <span class="s">"Ada22"</span>, <span class="s">"notas"</span>: [85, 92, 78]}
+<span class="k">print</span>(<span class="s">f"{estudiante['alias']}: {promedio(estudiante['notas']):.1f}"</span>)</pre></details>
+<details><summary>Reto 5 · Manejo de errores (proyecto final)</summary>
+<button class="cp" data-c="r5">Copiar</button>
+<pre id="r5"><span class="k">try</span>:
+    n = <span class="k">int</span>(<span class="k">input</span>(<span class="s">"Un número: "</span>))
+    <span class="k">print</span>(100 / n)
+<span class="k">except</span> ValueError:
+    <span class="k">print</span>(<span class="s">"Eso no es un número."</span>)
+<span class="k">except</span> ZeroDivisionError:
+    <span class="k">print</span>(<span class="s">"No se puede dividir entre cero."</span>)</pre></details>
+
+<h3 style="margin-top:26px">Rúbrica breve</h3>
+<div class="tw"><table>
+<tr><th>Criterio</th><th>Excelente (4)</th><th>Logrado (3)</th><th>En proceso (2)</th></tr>
+<tr><td>Funcionamiento</td><td>Sin errores, casos límite cubiertos</td><td>Funciona en casos normales</td><td>Falla con frecuencia</td></tr>
+<tr><td>Claridad del código</td><td>Nombres y comentarios claros</td><td>Legible</td><td>Difícil de seguir</td></tr>
+<tr><td>Comprensión</td><td>Explica cada línea</td><td>Explica lo esencial</td><td>No explica su código</td></tr>
+<tr><td>Ética y autoría</td><td>Cita fuentes e IA</td><td>Cita parcialmente</td><td>No cita</td></tr>
+</table></div>
+<h3 style="margin-top:26px">Recursos complementarios</h3>
+<div class="c"><ul><li>Documentación oficial: <b>docs.python.org/es</b> (tutorial en español).</li><li>Videos: canales de programación en español en YouTube (curso de Python desde cero).</li><li>Práctica extra: Replit, Python Tutor y retos tipo «Advent of Code» para principiantes.</li></ul></div>
+</div></section>
+
+<section id="b"><div class="w">
+<div class="part">Parte B</div><h2>Guía de ética y ciudadanía digital</h2>
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-p="p1">©️ Derechos de autor</button>
+<button role="tab" aria-selected="false" data-p="p2">📜 Licencias</button>
+<button role="tab" aria-selected="false" data-p="p3">🔒 Protección de datos</button>
+<button role="tab" aria-selected="false" data-p="p4">🪪 Identidad digital</button></div>
+
+<div class="pn on" id="p1"><div class="g">
+<div class="c pauta"><h3>El código también tiene dueño</h3><p>El copyright protege automáticamente toda obra original, incluido el código. Las licencias Creative Commons indican qué puedes hacer con imágenes y textos (CC BY exige dar crédito). Cita siempre código, imágenes y recursos de terceros.</p><pre><span class="m"># Fuente: respuesta de @usuario en Stack Overflow</span>
+<span class="m"># https://stackoverflow.com/q/xxxx · licencia CC BY-SA 4.0</span>
+<span class="k">def</span> invertir(texto): <span class="k">return</span> texto[::-1]</pre><p class="reto"><b>Reto:</b> pon crédito en cada fragmento ajeno que uses y anota si lo generó una IA.</p></div>
+<div class="c pauta"><h3>Reutiliza con criterio</h3><p>Antes de copiar de GitHub, Stack Overflow o una IA, lee la licencia, entiende el fragmento y adáptalo. Copiar sin comprender no es aprender.</p><pre><span class="m"># Reescribí la lógica con mis variables y la probé con 3 casos</span></pre><p class="reto"><b>Reto:</b> explica en voz alta cada línea antes de entregar un código que no escribiste solo.</p></div>
+</div></div>
+
+<div class="pn" id="p2"><div class="g">
+<div class="c pauta"><h3>Libre, abierto o propietario</h3><p><b>Software libre</b> garantiza libertades de uso, estudio, copia y mejora. <b>Open source</b> enfatiza el código visible y colaborativo. <b>Propietario</b> restringe el acceso al código y su redistribución.</p><p class="reto"><b>Reto:</b> busca un programa de cada tipo que uses a diario y clasifícalo.</p></div>
+<div class="c pauta"><h3>MIT, GPL, Apache y BSD</h3><p><b>MIT/BSD</b>: muy permisivas, solo piden conservar el aviso. <b>Apache 2.0</b>: permisiva y con concesión de patentes. <b>GPL</b>: si distribuyes una versión modificada, debe seguir siendo libre. Python usa la licencia PSF y la mayoría de sus librerías son abiertas.</p><pre><span class="k">pip</span> show requests  <span class="m"># revisa el campo License</span></pre><p class="reto"><b>Reto:</b> elige una licencia para tu proyecto final y justifícala en el README.</p></div>
+</div></div>
+
+<div class="pn" id="p3"><div class="g">
+<div class="c pauta"><h3>Tus datos no van al repositorio</h3><p>Nunca publiques nombres reales, correos, teléfonos ni claves en foros, repositorios o notebooks públicos. Una vez en línea, es muy difícil borrarlos.</p><pre><span class="k">import</span> os
+api_key = os.getenv(<span class="s">"MI_API_KEY"</span>)  <span class="m"># nunca escrita en el código</span></pre><p class="reto"><b>Reto:</b> revisa un notebook tuyo y elimina cualquier dato personal antes de compartirlo.</p></div>
+<div class="c pauta"><h3>Nube y contraseñas</h3><p>En Colab o Replit, revisa quién puede ver tu cuaderno. Usa contraseñas largas y únicas, un gestor de contraseñas y verificación en dos pasos (2FA).</p><p class="reto"><b>Reto:</b> activa 2FA en tu cuenta de correo y de GitHub esta semana.</p></div>
+</div></div>
+
+<div class="pn" id="p4"><div class="g">
+<div class="c pauta"><h3>Tu huella digital</h3><p>Cada commit, comentario y publicación forma tu reputación. Lo que compartes hoy puede verlo un futuro profesor o empleador. Comunícate con respeto en foros y GitHub: pregunta con claridad, agradece y no ridiculices.</p><p class="reto"><b>Reto:</b> busca tu nombre o alias en internet y evalúa qué imagen proyectas.</p></div>
+<div class="c pauta"><h3>IA como copiloto, no como sustituto</h3><p>Usa la IA para entender, depurar y practicar, no para entregar trabajo ajeno como propio. Declara cuándo la usaste y verifica siempre lo que genera.</p><pre><span class="m"># Prompt ético: «Explícame por qué falla este bucle,</span>
+<span class="m"># sin darme la solución completa»</span></pre><p class="reto"><b>Reto:</b> en cada entrega agrega una nota: «Usé IA para… y verifiqué…».</p></div>
+</div></div>
+</div></section>
+
+<section id="fin"><div class="w"><div class="concl">
+<h2>Conclusión reflexiva</h2>
+<p>Escribir código es crear herramientas que otros usarán, y toda herramienta tiene consecuencias. Un buen programador no solo hace que el programa funcione: reconoce el trabajo ajeno, protege los datos de las personas, elige licencias con conciencia y usa la IA con honestidad. Aprender Python es aprender a pensar con lógica; la ciudadanía digital es aprender a decidir con responsabilidad. Juntas forman una misma competencia: <b>programar para construir un entorno digital más justo, seguro y colaborativo.</b></p>
+</div></div></section>
+<footer>Código Ciudadano · Recurso educativo abierto · Python y ciudadanía digital</footer>
+
+<script>
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){
+document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected','false')});
+b.setAttribute('aria-selected','true');
+document.querySelectorAll('.pn').forEach(function(p){p.classList.remove('on')});
+document.getElementById(b.dataset.p).classList.add('on');});});
+document.querySelectorAll('.cp').forEach(function(b){b.addEventListener('click',function(){
+var t=document.getElementById(b.dataset.c).innerText;
+try{navigator.clipboard.writeText(t).then(function(){b.textContent='¡Copiado!';setTimeout(function(){b.textContent='Copiar'},1500)})}catch(e){}});});
+</script>
+</body>
+</html>
